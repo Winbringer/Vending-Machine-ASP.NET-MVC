@@ -1,0 +1,70 @@
+﻿@using VM_ASP_MVC.Models;
+@model ViewModel
+
+@{
+    ViewBag.Title = "Vending Machine";
+
+}
+@section scripts{
+    @Scripts.Render("~/scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+}
+<div>
+    <div class="row jumbotron">
+        <div class="col-md-4">
+            <table class="table">
+                <thead class="lead">Товары</thead>
+                @foreach (var p in Model.Products)
+                {
+                    <tr>
+                        <td>@p</td>
+                        <td>
+                            @Html.ActionLink("Купить", "GetProduct", new { Id = p.Id, purse=Model.Purses.Id }, new { @class = "btn btn-default btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="col-md-4">
+            <table class="table">
+                <thead> Автомат</thead>
+                @foreach (var c in Model.Change.Coins)
+                {
+                    <tr>
+                        <td>@c</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-md-4">
+            <table class="table">
+                <thead> Кошелек</thead>
+                @foreach (var c in Model.Purses.Coins)
+                {
+                    <tr>
+                        <td>@c</td>
+
+                        <td>
+                            @Html.ActionLink("Внести", "AddCoin", new { Id = c.Id, purse = Model.Purses.Id, change = Model.Change.Id }, new { @class = "btn btn-default btn-primary" })
+                            @*<td>@Ajax.ActionLink("Внести", "AdCoin", "Home", new { id = c.Id }, new AjaxOptions { UpdateTargetId = "divMy"}, new { @class = "btn btn-default btn-warning" })</td>*@
+                        </td>
+                    </tr>
+
+                }
+                <tr>
+                    <td><b>Внесенная сумма:</b></td>
+                    <td>
+                        @Model.Purses.Sum
+                    </td>
+                    <td>
+                        @Html.ActionLink("Сдача", "GetChange", new { Id = Model.Purses.Id, change = Model.Change.Id }, new { @class = "btn btn-default btn-danger" })
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+@Html.Raw(TempData["msg"])
