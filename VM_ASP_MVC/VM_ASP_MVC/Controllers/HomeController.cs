@@ -36,7 +36,9 @@ namespace VM_ASP_MVC.Controllers
 
                 if (pu.Sum >= pr.Price)
                 {
+                    if (pr.Count <= 0) throw new ArgumentException("У нас закончилися этот товар!");
                     pu.Sum -= pr.Price;
+                    pr.Count -= 1;
                     db.SaveChanges();
                     TempData["msg"] = "<script>alert('Спасибо!');</script>";
                     return RedirectToAction("Index");
