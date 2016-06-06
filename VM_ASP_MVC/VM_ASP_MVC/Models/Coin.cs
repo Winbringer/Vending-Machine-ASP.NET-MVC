@@ -14,7 +14,6 @@ namespace VM_ASP_MVC.Models
         public decimal Value { get; set; }
         public string Name { get; set; }
         public int Count { get; set; }
-        public Purse Purse { get; set; }
 
         public static implicit operator string(Coin с)
         {

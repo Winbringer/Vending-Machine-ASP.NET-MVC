@@ -19,7 +19,7 @@
                     <tr>
                         <td>@p</td>
                         <td>
-                            @Html.ActionLink("Купить", "GetProduct", new { Id = p.Id, purse=Model.Purses.Id }, new { @class = "btn btn-default btn-primary" })
+                            @Html.ActionLink("Купить", "GetProduct", new { Id = p.Id, purse = Model.Purses.Id }, new { @class = "btn btn-default btn-primary" })
                         </td>
                     </tr>
                 }
@@ -67,4 +67,9 @@
     </div>
 
 </div>
+
 @Html.Raw(TempData["msg"])
+@if (TempData["msg"] != null)
+{
+    TempData["msg"] = null;
+}

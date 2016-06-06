@@ -9,6 +9,6 @@ namespace VM_ASP_MVC.Models
     public class Change
     {
         public int Id { get; set; }
-        public List<Coin> Coins { get; set; }
+        public virtual List<Coin> Coins { get; set; }
     }
 }
